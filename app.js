@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const swaggerDoc = require('./swaggerDoc');
 const cors = require('cors');
 
 app.use(cors());
@@ -12,6 +13,8 @@ require('dotenv').config();
 /**
  * swagger docs
  */
+
+swaggerDoc(app);
 
 /**
  * connect database
