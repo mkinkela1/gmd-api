@@ -17,6 +17,19 @@ require('dotenv').config();
  * connect database
  */
 
+const mongoDbString = process.env.DATABASE_URL;
+
+mongoose.connect(
+    mongoDbString,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+    }
+);
+
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
