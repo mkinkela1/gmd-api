@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const swaggerDoc = require('./swaggerDoc');
 const cors = require('cors');
+const passport = require('passport');
 
 app.use(cors());
 
@@ -36,6 +37,7 @@ mongoose.connect(
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(passport.initialize());
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -52,6 +54,10 @@ app.use((req, res, next) => {
 /**
  * import routes
  */
+
+const auth = require('./api/routes/AuthRoutes');
+
+app.use('/api/auth', auth);
 
 app.use((req,res,next) => {
     const error = new Error('Not found');

@@ -1,5 +1,5 @@
 paths:
-  /api/auth/login:
+  /auth/login:
     post:
       summary: Authenticate user
       tags:
@@ -30,7 +30,7 @@ paths:
               schema:
                 type: object
                 $ref: '#definitions/authResponseModel'
-  /api/auth/refresh-token:
+  /auth/refresh-token:
     post:
       summary: Refresh token
       tags:
@@ -51,7 +51,7 @@ paths:
                 $ref: '#definitions/refreshTokenResponseModel'
         401:
           description: Token not valid
-  /api/auth/logout:
+  /auth/logout:
     post:
       summary: Log out
       tags:
@@ -70,6 +70,24 @@ paths:
               schema:
                 type: object
                 $ref: '#definitions/logoutResponseModel'
+  /auth/register:
+    post:
+      summary: Create a new user
+      tags:
+        - Auth
+      parameters:
+        - in: body
+          name: body
+          require: true
+          schema:
+            $ref: '#definitions/userRequestModel'
+      responses:
+        201:
+          description: User created
+          schema:
+            $ref: '#definitions/userResponseModel'
+        409:
+          description: User with that email already exists
 
 definitions:
   authRequestModel:
@@ -138,3 +156,24 @@ definitions:
       refreshToken:
         type: string
         example: abcd
+  userRequestModel:
+    type: object
+    properties:
+      email:
+        type: string
+        example: example@gmail.com
+      password:
+        type: string
+        example: password
+  userResponseModel:
+    type: object
+    properties:
+      _id:
+        type: string
+        example: 5e893473bf0d866cf54ea713
+      email:
+        type: string
+        example: example@gmail.com
+      password:
+        type: string
+        example: password

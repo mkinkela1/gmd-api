@@ -11,6 +11,8 @@ const Mongoose = require("mongoose");
 const { RefreshToken } = require("../services/refreshToken");
 const RefreshTokenService = new RefreshToken();
 
+require('./../../passport');
+
 /**
  * User authentication
  *
@@ -48,7 +50,7 @@ exports.auth = (req, res, next) => {
                 }
             });
         });
-    })(req, res);
+    })(req, res, next);
 };
 
 /**
@@ -107,5 +109,50 @@ exports.logout = (req, res, next) => {
     TokenBlacklist
         .create(tokenList)
         .then(r => res.status(201).json(r))
+        .catch(e => res.status(500).json(e));
+};
+
+/**
+ * Create a new user
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.register = (req, res, next) => {
+
+    const { email, password } = req.body;
+
+    User
+        .findOne({ email })
+        .exec()
+        .then(r => {
+
+            if(r && r._id)
+                res.status(409).json('User already exists');
+            else {
+
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(password, salt, (e, hash) => {
+
+                        if(e)
+                            return res.status(500).json(e);
+                        else {
+
+                            const user = new User({
+                                _id: new Mongoose.Types.ObjectId(),
+                                email,
+                                password: hash,
+                            });
+
+                            user
+                                .save()
+                                .then(r => res.status(201).json(r))
+                                .catch(e => res.status(500).json(e))
+                        }
+                    })
+                });
+            }
+        })
         .catch(e => res.status(500).json(e));
 };
