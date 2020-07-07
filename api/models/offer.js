@@ -18,9 +18,7 @@ const offer = mongoose.Schema({
         productName: { type: String, required: true },
         quantity: { type: Number, required: true, default: 1 },
         unit: { type: String, required: true },
-        unitPriceBeforeDiscount: { type: Number, required: true },
-        discount: { type: Number, required: true },
-        unitPriceWithDiscount: { type: Number, required: true },
+        unitPrice: { type: Number, required: true },
         amount: { type: Number, required: true }
     }]
 });
