@@ -14,14 +14,12 @@ exports.createOffer = (req, res, next) => {
     const { documentName, documentNumber, documentDate, boatModel, masterCitizenNumber, fullName, address, phoneNumber, email, validTill, paymentType, items } = req.body;
 
     let offerItems = [];
-    items.forEach(({ productName, quantity, unit, unitPriceBeforeDiscount, discount, unitPriceWithDiscount, amount }) => {
+    items.forEach(({ productName, quantity, unit, unitPrice, amount }) => {
         offerItems.push({
             productName,
             quantity,
             unit,
-            unitPriceBeforeDiscount,
-            discount,
-            unitPriceWithDiscount,
+            unitPrice,
             amount
         })
     });
@@ -94,14 +92,12 @@ exports.updateOffer = (req, res, next) => {
     const { documentName, documentNumber, documentDate, boatModel, masterCitizenNumber, fullName, address, phoneNumber, email, validTill, paymentType, items } = req.body;
 
     let offerItems = [];
-    items.forEach(({ productName, quantity, unit, unitPriceBeforeDiscount, discount, unitPriceWithDiscount, amount }) => {
+    items.forEach(({ productName, quantity, unit, unitPrice, amount }) => {
         offerItems.push({
             productName,
             quantity,
             unit,
-            unitPriceBeforeDiscount,
-            discount,
-            unitPriceWithDiscount,
+            unitPrice,
             amount
         })
     });
