@@ -6,7 +6,7 @@ const validateEmail = (email) => {
     return regex.test(email);
 };
 
-const doctorSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     email: {
         type: String,
@@ -19,4 +19,4 @@ const doctorSchema = mongoose.Schema({
     password: { type: String, required: true },
 });
 
-module.exports = mongoose.model('Doctor', doctorSchema);
+module.exports = mongoose.model('User', userSchema);

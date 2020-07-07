@@ -1,0 +1,151 @@
+paths:
+  /offer:
+    post:
+      security:
+        - ApiKeyAuth: []
+      summary: Authenticate user
+      tags:
+        - Offer
+      parameters:
+        - in: body
+          name: body
+          require: true
+          schema:
+            $ref: '#definitions/offerRequestModel'
+      responses:
+        201:
+          description: Offer created
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: '#definitions/offerResponseModel'
+
+definitions:
+  offerRequestModel:
+    type: object
+    properties:
+      documentName:
+        type: string
+        example: PONUDA
+      documentNumber:
+        type: number
+        example: 12345
+      documentDate:
+        type: number
+        example: 13445767
+      boatModel:
+        type: string
+        example: jedrilica
+      masterCitizenNumber:
+        type: string
+        example: 1343253565
+      fullName:
+        type: string
+        example: John Doe
+      address:
+        type: string
+        example: Muppet street
+      phoneNumber:
+        type: string
+        example: 56 5436 6677
+      email:
+        type: string
+        example: example@gmail.com
+      validTill:
+        type: number
+        example: 13445767
+      paymentType:
+        type: string
+        example: gotovina
+      items:
+        type: array
+        items:
+          type: object
+          properties:
+            productName:
+              type: string
+              example: tenda
+            quantity:
+              type: number
+              example: 1
+            unit:
+              type: string
+              example: kom
+            unitPriceBeforeDiscount:
+              type: number
+              example: 1500.00
+            discount:
+              type: number
+              example: 0.00
+            unitPriceWithDiscount:
+              type: number
+              example: 1500.00
+            amount:
+              type: number
+              example: 1500.00
+  offerResponseModel:
+    type: object
+    properties:
+      _id:
+        type: string
+        example: 507f1f77bcf86cd799439011
+      documentName:
+        type: string
+        example: PONUDA
+      documentNumber:
+        type: number
+        example: 12345
+      documentDate:
+        type: number
+        example: 13445767
+      boatModel:
+        type: string
+        example: jedrilica
+      masterCitizenNumber:
+        type: string
+        example: 1343253565
+      fullName:
+        type: string
+        example: John Doe
+      address:
+        type: string
+        example: Muppet street
+      phoneNumber:
+        type: string
+        example: 56 5436 6677
+      email:
+        type: string
+        example: example@gmail.com
+      validTill:
+        type: number
+        example: 13445767
+      paymentType:
+        type: string
+        example: gotovina
+      items:
+        type: array
+        items:
+          type: object
+          properties:
+            productName:
+              type: string
+              example: tenda
+            quantity:
+              type: number
+              example: 1
+            unit:
+              type: string
+              example: kom
+            unitPriceBeforeDiscount:
+              type: number
+              example: 1500.00
+            discount:
+              type: number
+              example: 0.00
+            unitPriceWithDiscount:
+              type: number
+              example: 1500.00
+            amount:
+              type: number
+              example: 1500.00

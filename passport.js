@@ -26,6 +26,7 @@ passport.use('login', new LocalStrategy({
             })
             .then(user => {
 
+                console.log(user);
                 if (!user || !bcrypt.compareSync(password, user.password)) {
                     return cb(null, false, {message: 'Incorrect email or password.'});
                 }
@@ -39,9 +40,8 @@ passport.use('login', new LocalStrategy({
             });
     }
 ));
-
 passport.use(new JWTStrategy({
-        jwtFromRequest: ExtractJWT.fromHeader('API_TOKEN'),
+        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
         secretOrKey   : TOKEN_SECRET_KEY
     },
     function (jwtPayload, cb) {
