@@ -57,9 +57,11 @@ app.use((req, res, next) => {
 
 const auth = require('./api/routes/AuthRoutes');
 const offer = require('./api/routes/OfferRoutes');
+const workOrder = require('./api/routes/WorkOrderRoutes');
 
 app.use('/api/auth', auth);
 app.use('/api/offer', offer);
+app.use('/api/work-order', workOrder);
 
 app.use((req,res,next) => {
     const error = new Error('Not found');
